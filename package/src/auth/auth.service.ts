@@ -2,10 +2,13 @@ import { ForbiddenException, Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { AuthDto } from "./dto";
 import * as argon from "argon2";
+import { InjectModel } from "@nestjs/mongoose";
+import { User } from "mongodb/user.schema";
+import { Model } from "mongoose";
 
 @Injectable()
 export class AuthService {
-  constructor(private prisma: PrismaService, private jwt: JwtService) {}
+  constructor(@InjectModel('user') private readonly userModel: Model<User>, private jwt: JwtService) {}
 
   // Sign JWT Token
   async signToken(
@@ -29,15 +32,11 @@ export class AuthService {
 
   // Login
   async login({ email, password }: AuthDto): Promise<{ access_token: string }> {
-    const user = await this.prisma.user.findUnique({
-      where: {
-        email,
-      },
-    });
+    const user = await this.userModel.find({ email })
 
     if (!user) throw new ForbiddenException("Credentials incorrect");
 
-    const pwMatches = await argon.verify(user.hash, password);
+    const pwMatches = await argon.verify(user.password, password);
     if (!pwMatches) throw new ForbiddenException("Credentials incorrect");
 
     return this.signToken(user.id, email);
@@ -50,7 +49,7 @@ export class AuthService {
   }: AuthDto): Promise<{ access_token: string }> {
     const hash = await argon.hash(password);
     try {
-      const user = await this.prisma.user.create({
+      const user = await this.userModel.create({
         data: {
           email,
           hash,
@@ -58,12 +57,7 @@ export class AuthService {
       });
       return this.signToken(user.id, email);
     } catch (error) {
-      if (error instanceof PrismaClientKnownRequestError) {
-        if (error.code === "P2002") {
-          throw new ForbiddenException("Credentials taken");
-        }
-      }
-      throw error;
+      return error;
     }
   }
 }
