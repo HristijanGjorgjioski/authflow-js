@@ -52,7 +52,7 @@ export class AuthService {
       const user = await this.userModel.create({
         data: {
           email,
-          hash,
+          password: hash,
         },
       });
       return this.signToken(user.id, email);

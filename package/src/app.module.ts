@@ -7,7 +7,7 @@ import { UserSchema } from 'mongodb/user.schema';
 @Module({
   imports: [
     MongooseModule.forRoot('mongodb://localhost:27017/studentdb'),
-      MongooseModule.forFeature([{ name: 'authflow-js-dev', schema: UserSchema }]),
+      MongooseModule.forFeature([{ name: 'user', schema: UserSchema }]),
   ],
   controllers: [AppController],
   providers: [AppService],
