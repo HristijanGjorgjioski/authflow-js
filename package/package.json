@@ -2,7 +2,7 @@
   "name": "authflow-js",
   "version": "1.0.0",
   "description": "Complete auth logic",
-  "main": "main.ts",
+  "main": "dist/src/app.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/HristijanGjorgjioski/authflow-js.git"
