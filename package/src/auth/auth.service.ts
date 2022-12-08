@@ -32,7 +32,7 @@ export class AuthService {
 
   // Login
   async login({ email, password }: AuthDto): Promise<{ access_token: string }> {
-    const user = await this.userModel.find({ email })
+    const user = await this.userModel.findOne({ email })
 
     if (!user) throw new ForbiddenException("Credentials incorrect");
 
