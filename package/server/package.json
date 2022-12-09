@@ -1,21 +1,7 @@
 {
-  "name": "authflow-js",
-  "version": "1.0.0",
-  "description": "Complete auth logic",
-  "main": "dist/src/app.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/HristijanGjorgjioski/authflow-js.git"
-  },
-  "keywords": [
-    "AUTHFLOW-JS"
-  ],
-  "author": "Hristijan Gjorgjioski",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/HristijanGjorgjioski/authflow-js/issues"
-  },
-  "homepage": "https://github.com/HristijanGjorgjioski/authflow-js#readme",
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
