@@ -1,8 +1,8 @@
 {
   "name": "authflow-js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Complete auth logic",
-  "main": "src/test.ts",
+  "main": "dist/lib/index.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/HristijanGjorgjioski/authflow-js.git"
@@ -33,7 +33,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
