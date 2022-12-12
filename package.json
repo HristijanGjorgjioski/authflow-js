@@ -1,5 +1,5 @@
 {
-  "name": "npm-package",
+  "name": "authflow-js",
   "version": "1.0.3",
   "description": "Complete AUTHFLOW Logic",
   "main": "./dist/cjs/index.js",
